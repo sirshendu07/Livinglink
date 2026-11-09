@@ -5,24 +5,13 @@ This guide walks you through deploying both the **LivingLink Backend** (Web Serv
 
 ---
 
-## 1. Deploying the Backend (Render Web Service)
+## 1. Backend Web Service on Render
 
-### Step 1.1: Create Web Service
-1. Log into your [Render Dashboard](https://dashboard.render.com/).
-2. Click **New +** &rarr; **Web Service**.
-3. Connect your GitHub repository: `sirshendu07/Livinglink`.
-4. Configure the service settings:
+Your live backend service is deployed at:
+👉 **`https://livinglink-qo95.onrender.com`**
 
-| Field | Value | Notes |
-| :--- | :--- | :--- |
-| **Name** | `livinglink-backend` | Or any name you prefer |
-| **Region** | `Singapore` (or closest to India) | Lowest latency for Upstash & MongoDB |
-| **Branch** | `main` | Production branch |
-| **Root Directory** | `backend` | **Important**: do not leave blank |
-| **Runtime** | `Node` | Node.js LTS |
-| **Build Command** | `npm install` | Installs backend dependencies |
-| **Start Command** | `npm start` | Runs production server (`node src/server.js`) |
-| **Plan Type** | `Free` (or `Starter`) | Free tier spins down after inactivity |
+Health check endpoint:
+👉 **`https://livinglink-qo95.onrender.com/api/v1/health`**
 
 ---
 

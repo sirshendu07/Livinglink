@@ -7,7 +7,18 @@ const env = require('../config/env');
 const initSocketIO = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: env.CORS_ORIGINS,
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        const isAllowed =
+          env.CORS_ORIGINS.includes(origin) ||
+          origin.endsWith('.vercel.app') ||
+          origin.endsWith('.onrender.com') ||
+          origin.includes('localhost') ||
+          origin.includes('127.0.0.1') ||
+          env.NODE_ENV === 'development';
+        if (isAllowed) return callback(null, true);
+        return callback(new Error('Blocked by CORS policy'));
+      },
       credentials: true
     },
     pingTimeout: 30000,

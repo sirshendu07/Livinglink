@@ -19,7 +19,14 @@ app.use(
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, curl or postman)
       if (!origin) return callback(null, true);
-      if (env.CORS_ORIGINS.includes(origin) || env.NODE_ENV === 'development') {
+      const isAllowed =
+        env.CORS_ORIGINS.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.endsWith('.onrender.com') ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1') ||
+        env.NODE_ENV === 'development';
+      if (isAllowed) {
         return callback(null, true);
       }
       return callback(new Error('Blocked by CORS policy'));

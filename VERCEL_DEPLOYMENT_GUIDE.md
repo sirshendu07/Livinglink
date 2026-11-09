@@ -27,12 +27,12 @@ This guide provides exact step-by-step instructions for deploying the **LivingLi
 Under the **Environment Variables** section on Vercel, add the following two variables:
 
 ```env
-VITE_API_BASE_URL=https://livinglink-backend.onrender.com/api/v1
-VITE_SOCKET_URL=https://livinglink-backend.onrender.com
+VITE_API_BASE_URL=https://livinglink-qo95.onrender.com/api/v1
+VITE_SOCKET_URL=https://livinglink-qo95.onrender.com
 ```
 
-> [!NOTE]
-> Replace `https://livinglink-backend.onrender.com` with your actual live backend URL (from Render, Railway, or your custom domain).
+> [!TIP]
+> Your live backend URL `https://livinglink-qo95.onrender.com` is already configured above! Just copy and paste these two variables into Vercel.
 
 ---
 
