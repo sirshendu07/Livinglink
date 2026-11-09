@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #0B0D10;
+    color: #F1F3F5;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0D10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252D36;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #36414E;
+}
+
+/* Glass & Glow effects */
+.subtle-mesh {
+  background-image: radial-gradient(at 0% 0%, rgba(184, 224, 193, 0.05) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, rgba(120, 169, 221, 0.04) 0px, transparent 50%);
+}
+
+.auth-mesh {
+  background-image: radial-gradient(circle at 10% 20%, rgba(184, 224, 193, 0.08) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(120, 169, 221, 0.05) 0%, transparent 40%);
+}
+
+/* Hide scrollbar for tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

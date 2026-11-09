@@ -41,10 +41,21 @@ const getFlats = catchAsync(async (req, res) => {
   return ApiResponse.paginated(res, 'Flats retrieved successfully', result.items, result);
 });
 
+const getAuditLogs = catchAsync(async (req, res) => {
+  const pagination = getPagination(req.query);
+  const result = await userService.getAuditLogs({
+    action: req.query.action,
+    ...pagination
+  });
+
+  return ApiResponse.paginated(res, 'Audit logs retrieved successfully', result.items, result);
+});
+
 module.exports = {
   createStaff,
   approveOwner,
   updateStatus,
   getUsers,
-  getFlats
+  getFlats,
+  getAuditLogs
 };

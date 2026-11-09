@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const Flat = require('../models/flat.model');
+const AuditLog = require('../models/auditLog.model');
 const AppError = require('../utils/appError');
 const { ROLES } = require('../constants/roles');
 const { USER_STATUS } = require('../constants/statuses');
@@ -168,10 +169,37 @@ const getAllFlats = async ({ tower, page = 1, limit = 50 }) => {
   };
 };
 
+/**
+ * Get system audit logs with pagination
+ */
+const getAuditLogs = async ({ action, page = 1, limit = 50 }) => {
+  const query = {};
+  if (action) query.action = action;
+
+  const skip = (page - 1) * limit;
+  const [logs, total] = await Promise.all([
+    AuditLog.find(query)
+      .populate('actor', 'name email role')
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit),
+    AuditLog.countDocuments(query)
+  ]);
+
+  return {
+    items: logs,
+    total,
+    page,
+    limit,
+    totalPages: Math.ceil(total / limit) || 1
+  };
+};
+
 module.exports = {
   createStaffAccount,
   approveOwnerAccount,
   updateUserStatus,
   getAllUsers,
-  getAllFlats
+  getAllFlats,
+  getAuditLogs
 };

@@ -13,7 +13,8 @@ router.use(authenticate);
 router.post('/staff', authorize(ROLES.ADMIN), validate(createStaffSchema), userController.createStaff);
 router.patch('/:id/approve', authorize(ROLES.ADMIN), userController.approveOwner);
 router.patch('/:id/status', authorize(ROLES.ADMIN), userController.updateStatus);
-router.get('/', authorize(ROLES.ADMIN), userController.getUsers);
+router.get('/audit-logs', authorize(ROLES.ADMIN), userController.getAuditLogs);
 router.get('/flats', authorize(ROLES.ADMIN, ROLES.SECURITY), userController.getFlats);
+router.get('/', authorize(ROLES.ADMIN), userController.getUsers);
 
 module.exports = router;
