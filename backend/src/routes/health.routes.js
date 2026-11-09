@@ -6,6 +6,7 @@ const ApiResponse = require('../utils/apiResponse');
 
 router.get('/health', async (req, res) => {
   const mongoStatus = mongoose.connection.readyState === 1 ? 'CONNECTED' : 'DISCONNECTED';
+  const redisPing = await cacheService.ping();
   const redisStatus = cacheService.isConnected() ? 'CONNECTED' : 'DEGRADED_FALLBACK';
 
   const isHealthy = mongoStatus === 'CONNECTED';
@@ -23,7 +24,8 @@ router.get('/health', async (req, res) => {
       },
       cache: {
         engine: 'Redis',
-        status: redisStatus
+        status: redisStatus,
+        ping: redisPing
       },
       nodeVersion: process.version
     },
