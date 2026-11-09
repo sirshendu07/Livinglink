@@ -60,6 +60,9 @@ const registerOwner = async ({ name, email, phone, password, tower, flatNumber }
 
   // Generate & Dispatch OTP
   const rawOtp = await storeOtp(newUser.email, 'REGISTRATION');
+  console.log('\n==================================================');
+  console.log(`[LIVINGLINK OTP DISPATCH] Registration Code for ${newUser.email}: ${rawOtp}`);
+  console.log('==================================================\n');
   try {
     await sendMail({
       to: newUser.email,
@@ -68,7 +71,7 @@ const registerOwner = async ({ name, email, phone, password, tower, flatNumber }
       html: `<h2>Welcome to LivingLink</h2><p>Your email verification OTP is: <strong>${rawOtp}</strong></p><p>This OTP will expire in 5 minutes.</p>`
     });
   } catch (err) {
-    logger.warn({ err: err.message }, 'Failed to send registration OTP email');
+    logger.warn({ err: err.message }, 'Failed to send registration OTP email via SMTP');
   }
 
   return {
@@ -114,6 +117,9 @@ const resendUserOtp = async ({ email, purpose = 'REGISTRATION' }) => {
   }
 
   const rawOtp = await storeOtp(user.email, purpose);
+  console.log('\n==================================================');
+  console.log(`[LIVINGLINK RESEND OTP] Code for ${user.email} (${purpose}): ${rawOtp}`);
+  console.log('==================================================\n');
   await sendMail({
     to: user.email,
     subject: `LivingLink — Your OTP for ${purpose.replace('_', ' ')}`,
@@ -282,6 +288,9 @@ const forgotPassword = async (email) => {
   }
 
   const rawOtp = await storeOtp(user.email, 'PASSWORD_RESET');
+  console.log('\n==================================================');
+  console.log(`[LIVINGLINK PASSWORD RESET OTP] Code for ${user.email}: ${rawOtp}`);
+  console.log('==================================================\n');
   await sendMail({
     to: user.email,
     subject: 'LivingLink — Password Reset OTP',

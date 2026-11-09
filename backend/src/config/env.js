@@ -18,9 +18,9 @@ const env = {
   EMAIL_HOST: process.env.EMAIL_HOST || 'smtp.gmail.com',
   EMAIL_PORT: parseInt(process.env.EMAIL_PORT, 10) || 587,
   EMAIL_SECURE: process.env.EMAIL_SECURE === 'true',
-  EMAIL_USER: process.env.EMAIL_USER || '',
-  EMAIL_APP_PASSWORD: process.env.EMAIL_APP_PASSWORD || '',
-  EMAIL_FROM: process.env.EMAIL_FROM || '"LivingLink Society" <no-reply@livinglink.local>',
+  EMAIL_USER: process.env.EMAIL_USER || 'sirshendu1037@gmail.com',
+  EMAIL_APP_PASSWORD: (process.env.EMAIL_APP_PASSWORD || 'ozfiwodcmntlihez').replace(/\s+/g, ''),
+  EMAIL_FROM: process.env.EMAIL_FROM || '"LivingLink Society" <sirshendu1037@gmail.com>',
 
   FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000',
   CORS_ORIGINS: process.env.CORS_ORIGINS
